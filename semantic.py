@@ -6,7 +6,7 @@ from tqdm.auto import tqdm
 from peft import PeftModel, PeftConfig
 
 
-from utils import get_dataframe_to_train, prepare_dataframe
+from utils_overwrited import get_dataframe_to_train, prepare_dataframe
 from constants import DATA_PATH, EMBDEDDING_MODEL_PATH, EMBEDDING_MODEL_QUERY, TOP_K, BATCH_SIZE, MODEL_OUTPUT_PATH
 
 
