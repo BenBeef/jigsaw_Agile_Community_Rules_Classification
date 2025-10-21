@@ -4,6 +4,7 @@
 
 import torch
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # 模型路径
@@ -158,30 +159,14 @@ if __name__ == "__main__":
     # 示例问题
     questions = [
         "你好！请用中文介绍一下你自己。",
-        "你好！请用中文介绍一下你自己。",
-        text,
-        text,
-        text,
-        text,
-        text,
-        text,
+        text
     ]
     
-    # 串行处理所有问题（GPU模型不支持真正的并发）
-    print(f"🚀 开始处理 {len(questions)} 个问题...")
-    total_start = time.time()
-    
+    # 演示对话
     for i, question in enumerate(questions, 1):
-        print(f"\n【问题 {i}/{len(questions)}】开始处理...")
-        if len(question) > 100:
-            print(f"内容预览: {question[:100]}...")
-        else:
-            print(f"内容: {question}")
+        print(f"\n【问题 {i}】{question}")
         print("-" * 60)
         answer = chat(question)
         print(f"【回答】{answer}")
         print("=" * 60)
-    
-    total_time = time.time() - total_start
-    print(f"\n✅ 所有问题处理完成！总耗时: {total_time:.2f}秒 | 平均每题: {total_time/len(questions):.2f}秒")
     
