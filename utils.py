@@ -22,10 +22,29 @@ def get_df():
         train_df = train_dataset[["body", "rule", "subreddit", "rule_violation",
                                 "positive_example_1", "positive_example_2", 
                                 "negative_example_1", "negative_example_2"]].copy()
-        train_df["positive_example"] = np.where(np.random.rand(len(train_df)) < 0.5, train_df["positive_example_1"], train_df["positive_example_2"])
-        train_df["negative_example"] = np.where(np.random.rand(len(train_df)) < 0.5, train_df["negative_example_1"], train_df["negative_example_2"])
+        
+        train_df_2 = train_df.copy()
+        train_df_3 = train_df.copy()
+        train_df_4 = train_df.copy()
+        train_df["positive_example"] = train_df["positive_example_1"]
+        train_df["negative_example"] = train_df["negative_example_1"]
+
+        train_df_2["positive_example"] = train_df_2["positive_example_1"]
+        train_df_2["negative_example"] = train_df_2["negative_example_2"]
+
+        train_df_3["positive_example"] = train_df_3["positive_example_2"]
+        train_df_3["negative_example"] = train_df_3["negative_example_1"]
+
+        train_df_4["positive_example"] = train_df_4["positive_example_2"]
+        train_df_4["negative_example"] = train_df_4["negative_example_2"]
+
+
+
         train_df.drop(columns=["positive_example_1", "positive_example_2", "negative_example_1", "negative_example_2"], inplace=True)
-        merge.append(train_df)
+        train_df_2.drop(columns=["positive_example_1", "positive_example_2", "negative_example_1", "negative_example_2"], inplace=True)
+        train_df_3.drop(columns=["positive_example_1", "positive_example_2", "negative_example_1", "negative_example_2"], inplace=True)
+        train_df_4.drop(columns=["positive_example_1", "positive_example_2", "negative_example_1", "negative_example_2"], inplace=True)
+        merge.extend([train_df, train_df_2, train_df_3, train_df_4])
     test_dataset = pd.read_csv("/kaggle/input/jigsaw-agile-community-rules/test.csv")
     test_dataset = test_dataset.groupby('rule', group_keys=False).apply(lambda x: x.sample(frac=frac, random_state=seed)).reset_index(drop=True)
     print(f"Select {len(test_dataset)} test data")
@@ -53,3 +72,8 @@ def build_dataset(df):
         columns.append("completion")
     dataset = Dataset.from_pandas(df[columns])
     return dataset
+
+
+if __name__ == "__main__":
+    df = get_df()
+    print(len(df))

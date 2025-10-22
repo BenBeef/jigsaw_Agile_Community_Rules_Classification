@@ -15,8 +15,8 @@ Only respond Yes/No.'''
 frac = 0.05
 use_train = True
 
-import kagglehub
+# import kagglehub
 
-deterministic = kagglehub.package_import('wasupandceacar/deterministic').deterministic
-deterministic.init_all(seed)
+# deterministic = kagglehub.package_import('wasupandceacar/deterministic').deterministic
+# deterministic.init_all(seed)
 
