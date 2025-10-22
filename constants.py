@@ -1,8 +1,8 @@
 seed = 0
 
-base_model_path = "/kaggle/input/qwen-3-reranker/transformers/4b/1"
+base_model_path = "/root/autodl-tmp/Qwen3-Reranker-4B"
 pretrain_lora_path = None
-lora_path = "/kaggle/working/pseudo_lora"
+lora_path = "/root/autodl-tmp/pseudo_lora"
 use_gptq = "gptq" in base_model_path
 
 positive = "Yes"
